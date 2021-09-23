@@ -22,8 +22,7 @@ mongoose
             if (kata) {
 
                 await axios.post(
-                    //`https://discord.com/api/webhooks/890345559402086450/Xr55fjOgEdaoHHaX-N8hwEAfTmaiZtENaM2Bolxbsa9IANM7BYIoL7iRPNLsuMuELieo`,
-                    `https://discord.com/api/webhooks/890292247717892156/LMhQ1OMXWjjzYtnZqWH5BWGn-LFSowtEDCZB1Tp2sdH7lmn1MWwfrNa1m09Vq1fzIwY2`,
+                    process.env.DISCORD_URL,
                     { content: kata.url })
                 kata.delivered = true;
                 kata.lastDelivered = new Date()
@@ -39,8 +38,3 @@ mongoose
 
 
 
-
-// axios.post(`https://discord.com/api/webhooks/890292247717892156/LMhQ1OMXWjjzYtnZqWH5BWGn-LFSowtEDCZB1Tp2sdH7lmn1MWwfrNa1m09Vq1fzIwY2`,
-//     {
-//         content: 'coool beans'
-//     }).then(res => console.log(res.data))
