@@ -13,7 +13,7 @@ router.post('/kata', async (req, res) => {
 
     console.log(req.body, ' =-=-=-=-=-')
 
-    let id = null;
+    let id = '';
     if (req.body.user) {
         id = req.body.user.id
     }
