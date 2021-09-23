@@ -11,13 +11,20 @@ const axios = require('axios')
 
 router.post('/kata', async (req, res) => {
 
-    let response = await axios.get(`https://www.codewars.com/api/v1/users/${req.body.user.id}`)
+    console.log(req.body, ' =-=-=-=-=-')
+
+    let id = null;
+    if (req.body.user) {
+        id = req.body.user.id
+    }
+
+    let response = await axios.get(`https://www.codewars.com/api/v1/users/${id}`)
     let codeWarsUser = response.data
 
     console.log('codeWarsUser', codeWarsUser)
     // codeWarsUser.katas.push('new kata')
 
-    let user = await User.findOneAndUpdate({ codeWarsId: req.body.user.id }, codeWarsUser, { upsert: true, new: true })
+    let user = await User.findOneAndUpdate({ codeWarsId: id }, codeWarsUser, { upsert: true, new: true })
     console.log('user is now ', user._id)
 
     let latestKata = await Kata.findOneAndUpdate({}, { $addToSet: { usersCompleted: user._id } }, { sort: { lastDelivered: -1 }, new: true })
